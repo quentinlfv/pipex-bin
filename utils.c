@@ -23,7 +23,7 @@ int	close_doc(int fd)
 	return (1);
 }
 
-static int	strcmmp(const char *s1, const char *s2, int i)
+int	strcmmp(const char *s1, const char *s2, int i)
 {
 	int	j;
 
@@ -64,7 +64,7 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 	return (NULL);
 }
 
-static int	strnbr(char const *s, char c)
+int	strnbr(char const *s, char c)
 {
 	int	i;
 	int	count;

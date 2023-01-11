@@ -3,7 +3,9 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
 typedef struct s_pipex
 {
@@ -27,9 +29,9 @@ void    child_two(t_pipex pipex, char **argv, char **envp);
 /* utils.c */
 int	open_doc(char *doc);
 int	close_doc(int fd);
-static int	strcmmp(const char *s1, const char *s2, int i);
+int	strcmmp(const char *s1, const char *s2, int i);
 char	*ft_strnstr(const char *s1, const char *s2, size_t n);
-static int	strnbr(char const *s, char c);
+int	strnbr(char const *s, char c);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 
