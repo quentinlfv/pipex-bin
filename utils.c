@@ -10,6 +10,7 @@ int	open_doc(char *doc)
         printf("failed to open\n");
 		return (-1);
 	}
+	printf("file open\n");
 	return (fd);
 }
 
@@ -20,6 +21,7 @@ int	close_doc(int fd)
         printf("failed to close\n");
 		return (-1);
 	}
+	printf("file close\n");
 	return (1);
 }
 
@@ -134,4 +136,64 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcpy(str + len1, s2, len2 + 1);
 	free((void *)s1);
 	return (str);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	if (s == NULL)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char				*str;
+	unsigned int		i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (len > ft_strlen(s) - start)
+		str = malloc(sizeof(char) * (ft_strlen(s) - start + 1));
+	else if (start > ft_strlen(s))
+	{
+		str = malloc(sizeof(char) * 1);
+		if (!str)
+			return (NULL);
+		str[0] = 0;
+		return (str);
+	}
+	else
+		str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	while (i < len && s[start])
+		str[i++] = s[start++];
+	str[i] = 0;
+	return (str);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	unsigned int	i;
+	int				srclen;
+
+	i = 0;
+	srclen = ft_strlen(src);
+	if (!dst || !src)
+		return (0);
+	if (size == 0)
+		return (srclen);
+	while (src[i] && i < size - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = 0;
+	return (srclen);
 }
