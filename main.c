@@ -22,6 +22,7 @@ int main(int argc, char **argv, char **envp)
     if (pipex.fd[1] < 0)
         return (close_doc(pipex.fd[0]), (0));
     pipex.path = path(envp);
+    printf("%s\n", pipex.path);
     pipex.all_path = ft_split(pipex.path, ':');
     // pipe(pipex.pipefd);
     // pipex.pid[0] = fork();

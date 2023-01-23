@@ -1,5 +1,18 @@
 #include "pipex.h"
 
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	if (s == NULL)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
 int	open_doc(char *doc)
 {
 	int	fd;
@@ -36,6 +49,26 @@ int	strcmmp(const char *s1, const char *s2, int i)
 	if (s2[j] != 0)
 		return (s1[i] - s2[j]);
 	return (s1[i -1] - s2[j - 1]);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	unsigned int	i;
+	int				srclen;
+
+	i = 0;
+	srclen = ft_strlen(src);
+	if (!dst || !src)
+		return (0);
+	if (size == 0)
+		return (srclen);
+	while (src[i] && i < size - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = 0;
+	return (srclen);
 }
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t n)
@@ -83,6 +116,34 @@ int	strnbr(char const *s, char c)
 			i++;
 	}
 	return (count);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char				*str;
+	unsigned int		i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (len > ft_strlen(s) - start)
+		str = malloc(sizeof(char) * (ft_strlen(s) - start + 1));
+	else if (start > ft_strlen(s))
+	{
+		str = malloc(sizeof(char) * 1);
+		if (!str)
+			return (NULL);
+		str[0] = 0;
+		return (str);
+	}
+	else
+		str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	while (i < len && s[start])
+		str[i++] = s[start++];
+	str[i] = 0;
+	return (str);
 }
 
 char	**ft_split(char const *s, char c)
